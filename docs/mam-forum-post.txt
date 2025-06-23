@@ -1,0 +1,670 @@
+
+mainBanner
+2025-06-23 01:59:21 UTC
+ 
+Millionaire's vault: 8,453,800 points
+Connectable: Yes! Client accepts incoming connections
+5.202624 ratio
+Bonus: 79856
+Invites: 10
+
+    Home
+    RapidHog Yes! Client accepts incoming connections ↓
+    Help & Support ↓
+    Torrents ↓
+    Community ↓
+    Fun & Games ↓
+    Donations 46.8%
+    get a seedbox
+
+You have 22 H&R torrents (21 inactive)You have 1 potential H&R torrents inactive
+hide news
+
+3x all donation credits till the end of June! Click for more info!
+Forums> Support> Tips, Tricks, and Tweaks > User Scripts, Apps, and Styles > [CONTAINER] elforkhead's seedbox API container
+
+<< Prev       [1] 2 3      Next >>
+ 
+#992936 by elforkhead (VIP) at 2025-04-07 04:07:32 GMT (10.9 weeks ago) 	Top
+
+
+VIP
+Posts: 23
+Ratio: 458.28
+UL: 301.47 GiB
+DL: 673.62 MiB 	
+
+Smoother support for MAM's multi-ASN sessions has been released. You will need to use a single session/mam_id. The previous multisession format will now produce an error.
+
+ 
+
+This is a python script in a docker image which will provide session IP updates through the seedbox API. It is designed to be completely hands off after setup.
+
+ 
+
+Features:
+
+    Explains common error situations in plain english
+    Detailed logging of IP changes and API responses
+    Anticipates ratelimiting and avoids unnecessary API calls
+    Apprise support for notifications
+
+ 
+
+Installation:
+
+ 
+
+See the github for the docker compose format: https://github.com/elforkhead/mamapi
+
+ 
+
+Creating a session cookie/"MAM_ID" to authenticate:
+
+    Visit your security preferences
+    Create a session, ideally using the IP your first connection will be from
+    The locked session selection should be "ASN"
+    The dynamic seedbox selection should be "Yes"
+    Copy the mam_id it provides - this will be used as the MAM_ID in my container
+    Add additional ASNs when needed by inputting an associated IP through the 'Manage Session' menu and choosing 'Update the session'
+
+ 
+
+If you choose to view the cookie/mam_id again after its first creation, the string will be regenerated and you will need to replace what you are using in the container.
+
+Last edited by elforkhead at 2025-06-19 04:09:24 GMT
+PM elforkhead  	Quote Post Report Post 
+
+#994438 by Discardead (VIP) at 2025-04-12 00:15:42 GMT (10.2 weeks ago) 	Top
+
+
+VIP
+Posts: 2
+Ratio: 13.15
+UL: 1.284 TiB
+DL: 100.02 GiB 	
+
+Took a little poking to get it running on unRAID. (without compose) 
+
+ 
+
+Seems to be working as intended, I appreciate your time on this. 
+
+Thank you. 
+PM Discardead  	Quote Post Report Post 
+
+#994948 by mpzeroDonor (Elite VIP) at 2025-04-13 14:36:04 GMT (10 weeks ago) 	Top
+
+
+Elite VIP
+Posts: 6
+Ratio: 26.44
+UL: 2.016 TiB
+DL: 78.07 GiB 	
+
+[mod edit: please avoid over quoting; there is no need to quote the post directly above]
+
+ 
+
+Any chance you remember the steps you did that you could provide? I am also an unraid user and looking for a way to automate my vpn ip address changing when restarting the container. Currently using the binhex qt docker image.
+
+ 
+
+Edit: Looking at the github, it appears to just be a single python script which is easy enough to understand. I think my issue is that I have my vpn connection on a per docker basis instead of the entire system. I should  probably switch that to be unraid wide and then this would just work for me. I don't think it would work with my current setup (vpn included in docker).
+
+Last edited by staff at 2025-05-04 13:56:25 GMT
+PM mpzero  	Quote Post Report Post 
+
+#995003 by elforkhead (VIP) at 2025-04-13 19:20:44 GMT (10 weeks ago) 	Top
+
+
+VIP
+Posts: 23
+Ratio: 458.28
+UL: 301.47 GiB
+DL: 673.62 MiB 	
+
+[mod edit: please avoid over quoting; there is no need to quote the post directly above]
+
+ 
+
+If I'm understanding your usecase correctly, this container should be able to work for you without much tweaking. You need this container to share the networking of your binhex qt container. If you are using docker-compose, the easiest way to do this is to add this container as an additional service in the same compose file as binhex qt, and add network_mode: "service:nameofyourbinhexservice" underneath this container's service. This essentially runs all of the networking of this container through your VPN container.
+
+ 
+
+If this works out well, this container will operate behind your container's vpn and use the VPN IP when updating myanonamouse.
+
+ 
+
+If you're using CLI rather than docker compose, you can do something like docker run --network container:nameofyourvpncontainer nameofthiscontainersimage to do the same thing.
+
+Last edited by staff at 2025-05-04 13:56:10 GMT
+PM elforkhead  	Quote Post Report Post 
+
+#995683 by EndersShadow27 (VIP) at 2025-04-16 18:22:27 GMT (9.6 weeks ago) 	Top
+
+
+VIP
+Posts: 8
+Ratio: 5.57
+UL: 31.67 GiB
+DL: 5.69 GiB 	
+
+Just wanted to say thanks for this!
+
+I couldn't get the other container to work, but this one booted right up and worked immediately! but my VPN IP hasn't changed yet so we'll see.
+
+BTW, I'm running it as non-root and no privilege escalation and it seems to be working fine -
+
+      - PUID=1000
+      - GUID=1000
+
+    security_opt:
+  # Prevent escalation of privileges after the container is started
+      - no-new-privileges:true
+
+Would you open to adding a check time adjustment variable for the docker compost?
+
+My VPN IP does change, not very often - I could easily set the check to once every 6 hours or even 24 hours and be fine - would lighten the load on the MAM API for those that are able to do so.
+
+
+PM EndersShadow27  	Quote Post Report Post 
+
+#995688 by elforkhead (VIP) at 2025-04-16 18:34:18 GMT (9.6 weeks ago) 	Top
+
+
+VIP
+Posts: 23
+Ratio: 458.28
+UL: 301.47 GiB
+DL: 673.62 MiB 	
+
+[mod edit: please avoid over quoting; there is no need to quote the post directly above]
+
+ 
+
+ 
+
+Typically it will only blindly hit the MAM API is on its first ever boot. That first response from the API tells the script the last API update time and what IP it was updated to. These are written to a .json so they persist through container restarts.
+
+ 
+
+After that it only checks for changes to the external ip by pinging ipify.org every 5 minutes, and they don't care if you use it "millions of times a minute." If it detects a change in external IP, and it has been more than an hour since the last update to the MAM API (due to the ratelimit), it will only then ping MAM's API.
+
+ 
+
+As I think about it make sure that UID/GID has read/write privileges on the data mount, I'm not sure how it will behave if it can't write.
+
+Last edited by staff at 2025-05-04 13:55:24 GMT
+PM elforkhead  	Quote Post Report Post 
+
+#995704 by EndersShadow27 (VIP) at 2025-04-16 20:24:24 GMT (9.6 weeks ago) 	Top
+
+
+VIP
+Posts: 8
+Ratio: 5.57
+UL: 31.67 GiB
+DL: 5.69 GiB 	
+
+[mod edit: please avoid over quoting; there is no need to quote the post directly above]
+
+Good to know, thanks! That makes more sense.
+
+and yes I changed the data directory to something in that users path before deploying and it worked fine. Here's the full compose I used, with variables for the local stuff.
+
+ervices:
+  mamapi:
+    image: elforkhead/mamapi:latest
+    container_name: mamapi
+    volumes:
+      - ${VPN_CONFIG}:/data
+    environment:
+      - MAM_ID=${SESSION_ID}
+      - DEBUG=True
+      - PUID=1000
+      - GUID=1000 # Run as a non-root user.
+    network_mode: "container:gluetun"
+    security_opt:
+  # Prevent escalation of privileges after the container is started
+      - no-new-privileges:true
+    restart: 'unless-stopped'
+
+Last edited by staff at 2025-05-04 13:56:47 GMT
+PM EndersShadow27  	Quote Post Report Post 
+
+#995777 by Discardead (VIP) at 2025-04-17 00:30:51 GMT (9.5 weeks ago) 	Top
+
+
+VIP
+Posts: 2
+Ratio: 13.15
+UL: 1.284 TiB
+DL: 100.02 GiB 	
+
+mpzero in post #994948 wrote:
+
+Any chance you remember the steps you did that you could provide? I am also an unraid user and looking for a way to automate my vpn ip address changing when restarting the container. Currently using the binhex qt docker image.
+
+ 
+
+Edit: Looking at the github, it appears to just be a single python script which is easy enough to understand. I think my issue is that I have my vpn connection on a per docker basis instead of the entire system. I should  probably switch that to be unraid wide and then this would just work for me. I don't think it would work with my current setup (vpn included in docker).
+
+ 
+
+I only have qbit and some proxy hosts behind my vpn (added socks5 to gluetun)
+
+but my Arrs use the proxy via prowlarr. I'm not sure why people discourage it, i haven't had an issue. but every use case is unique. 
+
+ 
+
+UNRAID 7.0.0
+
+ 
+
+Repository : elforkhead/mamapi:latest
+
+Support Thread : https://github.com/elforkhead/mamapi
+
+Network Type : Container
+
+Container Network : GluetunVPN (yours may be binhex-qbittorentvpn)
+
+Use Tailscale : Off
+
+Privileged : Off
+
+ 
+
+Variable : MAM_ID (your ID)
+
+Variable : DEBUG (True/*blank*)
+
+Path : /data
+
+the mount point ends up being (for me).
+
+/data > /mnt/user/appdata/mamapi
+
+Last edited by staff at 2025-05-04 13:57:17 GMT
+PM Discardead  	Quote Post Report Post 
+
+#995967 by EndersShadow27 (VIP) at 2025-04-17 13:54:42 GMT (9.5 weeks ago) 	Top
+
+
+VIP
+Posts: 8
+Ratio: 5.57
+UL: 31.67 GiB
+DL: 5.69 GiB 	
+
+I spoke too soon. It's failing once my VPN IP changed.
+
+[2025-04-17 13:51:40] [INFO] Starting script. Thanks for using elforkhead's mamapi.py
+[2025-04-17 13:51:40] [INFO] https://github.com/elforkhead/mamapi
+[2025-04-17 13:51:40] [INFO] Logger level: DEBUG (enabled by DEBUG env var)
+[2025-04-17 13:51:40] [INFO] Checking for IP changes every 5 minutes
+[2025-04-17 13:51:40] [DEBUG] Using mam_id: ZpJ****REDACTED
+[2025-04-17 13:51:40] [DEBUG] Attempting to grab external IP...
+[2025-04-17 13:51:40] [DEBUG] Fetched external IP: 3*****REDACTED
+[2025-04-17 13:51:40] [DEBUG] rateLimited fxn: comparing NOW as '2025-04-17 13:51:40' to provided timestamp '2025-04-16 18:16:35 - should result in returning 'False'
+[2025-04-17 13:51:40] [INFO] Detected IP change. Old IP: 'REDACTED' New IP: 'REDACTED'
+[2025-04-17 13:51:40] [INFO] Sending cookie to MAM...
+[2025-04-17 13:51:40] [DEBUG] Received HTTP status code: '403'
+[2025-04-17 13:51:40] [INFO] Received response: 'invalid session'
+[2025-04-17 13:51:40] [CRITICAL] Caught exception: 'Logger' object has no attribute 'critial'
+[2025-04-17 13:51:40] [CRITICAL] The script will now exit
+[2025-04-17 13:51:47] [INFO] Starting script. Thanks for using elforkhead's mamapi.py
+[2025-04-17 13:51:47] [INFO] https://github.com/elforkhead/mamapi
+[2025-04-17 13:51:47] [INFO] Logger level: DEBUG (enabled by DEBUG env var)
+[2025-04-17 13:51:47] [INFO] Checking for IP changes every 5 minutes
+[2025-04-17 13:51:47] [DEBUG] Using mam_id: Z***REDACTED
+[2025-04-17 13:51:47] [DEBUG] Attempting to grab external IP...
+[2025-04-17 13:51:48] [DEBUG] Fetched external IP: REDACTED
+[2025-04-17 13:51:48] [DEBUG] rateLimited fxn: comparing NOW as '2025-04-17 13:51:48' to provided timestamp '2025-04-16 18:16:35 - should result in returning 'False'
+[2025-04-17 13:51:48] [INFO] Detected IP change. Old IP: 'REDACTED' New IP: 'REDACTED'
+[2025-04-17 13:51:48] [INFO] Sending cookie to MAM...
+[2025-04-17 13:51:48] [DEBUG] Received HTTP status code: '403'
+[2025-04-17 13:51:48] [INFO] Received response: 'invalid session'
+[2025-04-17 13:51:48] [CRITICAL] Caught exception: 'Logger' object has no attribute 'critial'
+[2025-04-17 13:51:48] [CRITICAL] The script will now exit
+
+
+I was able to get it working by deleting the session and re-adding it.
+
+One thing I still do not understand and none of the VPN guides make clear: Which cookie are you supposed to grab?
+
+There are at least 4 different cookies you could end up with:
+
+-Add a session via IP > Will show you a cookie
+
+-Allow Session to set Dynamic seedbox IP > will generate a new cookie (if you view it)
+
+-Switch to ASN Locked session > will generate a new cookie (if you view it)
+
+-Clicking the View cookie at any time will generate a cookie
+
+ 
+
+Which of these is supposed to be enabled AND at which stage are you supposed to view the cookie and save it to the container?
+
+
+
+Last edited by EndersShadow27 at 2025-04-17 14:20:58 GMT
+PM EndersShadow27  	Quote Post Report Post 
+
+#996056 by elforkhead (VIP) at 2025-04-17 20:38:30 GMT (9.4 weeks ago) 	Top
+
+
+VIP
+Posts: 23
+Ratio: 458.28
+UL: 301.47 GiB
+DL: 673.62 MiB 	
+
+EndersShadow27 in post #995967 wrote:
+One thing I still do not understand and none of the VPN guides make clear: Which cookie are you supposed to grab?
+
+ 
+
+Thanks, I pushed a fix for the logger typo. If you want it, make sure you pull a fresh container image. While it crashed due to the typo, you were only like one or two lines away from an exit due to the invalid session which I think is the main issue you're having.
+
+ 
+
+I put a guide for generating a proper mam_id/session in the OP.
+
+Last edited by elforkhead at 2025-04-17 21:16:27 GMT
+PM elforkhead  	Quote Post Report Post 
+
+#996076 by EndersShadow27 (VIP) at 2025-04-17 22:29:46 GMT (9.4 weeks ago) 	Top
+
+
+VIP
+Posts: 8
+Ratio: 5.57
+UL: 31.67 GiB
+DL: 5.69 GiB 	
+
+elforkhead in post #992936 wrote:
+
+DO NOT CREATE AN ASN LOCKED SESSION. ASN locked sessions are invalidated when you connect from another ASN, and you will have to manually create a new session.
+
+ 
+
+If you choose to view the cookie/mam_id again after its first creation, the string will be regenerated and you will need to replace what you are using in the container. Make sure the container is rebuilt when updating any environment variables so the script has your new mam_id.
+
+ 
+
+Thanks! This is the kicker that seems to be missing from the other guides. 
+
+Seems to be running cleanly now, I'll monitor.
+
+I have searched a few times trying to find the MAM documentation for ASN Lock sessions and havent come up with it, but I probably just don't know where to look.
+
+PM EndersShadow27  	Quote Post Report Post 
+
+#996483 by NeverSimpleDonor (VIP) at 2025-04-19 11:17:47 GMT (9.2 weeks ago) 	Top
+
+
+VIP
+Posts: 31
+Ratio: 21.53
+UL: 478.77 GiB
+DL: 22.24 GiB 	
+
+Nice job! just wondering is there an advantage or difference when using this container or the container made by @metcalfe:
+
+ 
+
+https://www.myanonamouse.net/f/t/76123/p/p878526#878526 ?
+
+ 
+
+I'm using the one created by @metcalfe now and it does it job for me as far as I can tell
+PM NeverSimple  	Quote Post Report Post 
+
+#996495 by elforkhead (VIP) at 2025-04-19 12:21:00 GMT (9.2 weeks ago) 	Top
+
+
+VIP
+Posts: 23
+Ratio: 458.28
+UL: 301.47 GiB
+DL: 673.62 MiB 	
+
+I made this container because metcalfe's declares the session/cookie file invalid and exits if you are ratelimited. If your VPN IP happens to change twice in an hour, the container crashes.
+
+ 
+
+Here are the docker logs in this situation from metcalfe's container:
+
+    + echo response: '{"Success":false,"msg":"Last' change too 'recent"}'
+    + echo Current cookie file is invalid. Please delete it, set the mam_id, and restart the container.
+    response: {"Success":false,"msg":"Last change too recent"}
+    + exit 1
+    Current cookie file is invalid. Please delete it, set the mam_id, and restart the container.
+
+ 
+
+Here's what mine looks like if it hits an unexpected ratelimit:
+
+    [2025-04-19 12:06:07] [INFO] Detected IP change. Old IP: 'redacted' New IP: 'redacted'
+    [2025-04-19 12:06:07] [INFO] Sending cookie to MAM...
+    [2025-04-19 12:06:08] [INFO] Received response: 'last change too recent'
+    [2025-04-19 12:06:08] [WARNING] MAM rejects due to last change too recent, and last successful update is unknown: retrying in 30 minutes
+
+My script can anticipate ratelimiting by recording the last time it updated MAM, so it won't even bother hitting MAM's API in this situation after it has been running for a while, it will calculate how long it has to wait (61 minutes after the last update) before hitting the API again.
+PM elforkhead  	Quote Post Report Post 
+
+#996596 by NeverSimpleDonor (VIP) at 2025-04-19 17:49:32 GMT (9.1 weeks ago) 	Top
+
+
+VIP
+Posts: 31
+Ratio: 21.53
+UL: 478.77 GiB
+DL: 22.24 GiB 	
+
+Seems like I'm going to give this a try.
+
+ 
+
+Thinking about your example: If the IP changes within an hour after the last IP update, the user will not be able to communicate with MAM (download/seed) until after that hour expires and the IP update will be sent.
+
+Is that correct?
+
+ 
+
+If so, nothing you can do about it, of course, and at least the situation will 'auto-correct' instead of the container exiting completely.
+PM NeverSimple  	Quote Post Report Post 
+
+#996600 by elforkhead (VIP) at 2025-04-19 17:58:48 GMT (9.1 weeks ago) 	Top
+
+
+VIP
+Posts: 23
+Ratio: 458.28
+UL: 301.47 GiB
+DL: 673.62 MiB 	
+
+That's the gist of it. I have found that my seeding sometimes continues even with a session IP that's out of date, but downloads usually fail.
+PM elforkhead  	Quote Post Report Post 
+
+#1000667 by Component9720 (User) at 2025-05-02 22:58:38 GMT (7.3 weeks ago) 	Top
+
+
+User
+Posts: 1
+Ratio: 19.53
+UL: 13.85 GiB
+DL: 726.49 MiB 	
+
+This is great. I've been running into this same issue and was about to write my own container to do this with similar checking. Thanks!
+PM Component9720  	Quote Post Report Post 
+
+#1000780 by NeverSimpleDonor (VIP) at 2025-05-03 11:08:40 GMT (7.2 weeks ago) 	Top
+
+
+VIP
+Posts: 31
+Ratio: 21.53
+UL: 478.77 GiB
+DL: 22.24 GiB 	
+
+I've been using this now for a couple of weeks and they have been very uneventful weeks... which is just how I like it. Container just works, no problems.
+
+So just a little feedback that it so far works fine for me
+
+Thanks for creating this @elforkhead
+
+Last edited by NeverSimple at 2025-05-03 11:09:19 GMT
+PM NeverSimple  	Quote Post Report Post 
+
+#1001260 by metaclam (User) at 2025-05-04 13:53:26 GMT (7 weeks ago) 	Top
+
+
+User
+Posts: 15
+Ratio: 10.00
+UL: 5.42 GiB
+DL: 555.72 MiB 	
+
+[mod edit: please avoid over quoting; there is no need to quote the post directly above]
+
+same. i switched from the previous one cuz of problems and this one has been smooth. tyvm.
+
+Last edited by staff at 2025-05-04 13:54:41 GMT
+PM metaclam  	Quote Post Report Post 
+
+#1001646 by MetcalfeDonor (Knightguard) at 2025-05-05 22:51:44 GMT (6.8 weeks ago) 	Top
+
+
+Support Staff
+Posts: 828
+Ratio: 3,855
+UL: 165.460 TiB
+DL: 43.95 GiB 	
+
+As the author of the other one, I confirm the error handling is apalling.
+
+ 
+
+If/when I get some time I'll be redoing it - I see no problem with us having a few different options :D
+PM Metcalfe  	Quote Post Report Post 
+
+#1001759 by metaclam (User) at 2025-05-06 12:57:15 GMT (6.7 weeks ago) 	Top
+
+
+User
+Posts: 15
+Ratio: 10.00
+UL: 5.42 GiB
+DL: 555.72 MiB 	
+
+Metcalfe in post #1001646 wrote:
+
+As the author of the other one, I confirm the error handling is apalling.
+
+ 
+
+If/when I get some time I'll be redoing it - I see no problem with us having a few different options :D
+
+We appreciate both of your work. Thank you.
+PM metaclam  	Quote Post Report Post 
+
+#1001829 by NeverSimpleDonor (VIP) at 2025-05-06 17:33:52 GMT (6.7 weeks ago) 	Top
+
+
+VIP
+Posts: 31
+Ratio: 21.53
+UL: 478.77 GiB
+DL: 22.24 GiB 	
+
+Me using the container from @elforkhead now doesn't mean I didn't appreciate the work done by @metcalfe. That would make no sense. That container made me understand the process and probably was a stepping stone for @elforkhead to try to improve upon. We all stand on the shoulders of someone else. That's how things get improved.
+PM NeverSimple  	Quote Post Report Post 
+
+#1001831 by RoqSaultDonor (Elite VIP) at 2025-05-06 17:48:50 GMT (6.7 weeks ago) 	Top
+
+
+Elite VIP
+Posts: 9
+Ratio: 12.74
+UL: 4.409 TiB
+DL: 354.41 GiB 	
+
+thanks for making this! I haven't dug into it yet but I've been having a hell of a time getting gluetun to work properly for downloads on mam
+PM RoqSault  	Quote Post Report Post 
+
+#1001912 by elforkhead (VIP) at 2025-05-07 00:18:37 GMT (6.7 weeks ago) 	Top
+
+
+VIP
+Posts: 23
+Ratio: 458.28
+UL: 301.47 GiB
+DL: 673.62 MiB 	
+
+Glad everyone is getting use out of this.
+
+ 
+
+@RoqSault, what problems are you having? I run everything behind gluetun and can confirm it took some fiddling.
+PM elforkhead  	Quote Post Report Post 
+
+#1002264 by RoqSaultDonor (Elite VIP) at 2025-05-07 21:42:49 GMT (6.5 weeks ago) 	Top
+
+
+Elite VIP
+Posts: 9
+Ratio: 12.74
+UL: 4.409 TiB
+DL: 354.41 GiB 	
+
+@elforkhead I'll get back to you if I have any issues after using your image. When I tried I was just trying to follow documentation and learn networking at the same time lol. I got my dynamic IP and yellow connection but no actual data passing through
+PM RoqSault  	Quote Post Report Post 
+
+#1002510 by metaclam (User) at 2025-05-08 14:22:22 GMT (6.4 weeks ago) 	Top
+
+
+User
+Posts: 15
+Ratio: 10.00
+UL: 5.42 GiB
+DL: 555.72 MiB 	
+
+I've encountered some problems with the container continuously restarting.  Error in log has to do with invalid ASN session cookie or something.  I've had to delete the .json file, delete the container, then get a new mam cookie and rebuild the project.
+
+ 
+
+what IP to use remains the biggest question mark for me.  as long as i am "still" connectable  I can right click on the "Connectable:" near the ratio and get the correct, working IP.  Then enter that, allow the session to set dynamic seedbox IP, then view the IP locked session cookie, and copy that, and use that in the YAML for the container, and rebuild. do not turn on ASN. now all good.
+
+ 
+
+just what if I was not connectable? where would I then obtain the (transmissionopenvpn) container's IP?
+
+ 
+
+ 
+
+ 
+
+ 
+
+Last edited by metaclam at 2025-05-08 14:23:26 GMT
+PM metaclam  	Quote Post Report Post 
+
+<< Prev       [1] 2 3      Next >>
+
+Quick Reply
+p
+Press Alt+0 for help
+Build with
+
+   
+Preview
+
+Quick jump:
+
+© 2025 Myanonamouse
+

@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>mamapi</Name>
+  <Repository>elforkhead/mamapi:latest</Repository>
+  <Registry>https://hub.docker.com/r/elforkhead/mamapi</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/elforkhead/mamapi</Support>
+  <Project>https://github.com/elforkhead/mamapi</Project>
+  <Overview>MAM API container for updating MyAnonamouse dynamic seedbox IP addresses automatically. This container monitors your VPN IP changes and updates MAM's API to ensure continuous connectivity with the tracker.&#xD;
+&#xD;
+Features:&#xD;
+- Automatic IP change detection and updating&#xD;
+- Rate limit handling to avoid API throttling&#xD;
+- Clear error messages and logging&#xD;
+- Support for ASN locked sessions&#xD;
+- Apprise notification support&#xD;
+&#xD;
+IMPORTANT: You must create a MAM session with:&#xD;
+1. ASN locked session: Yes&#xD;
+2. Dynamic seedbox: Yes&#xD;
+3. Copy the mam_id cookie when first created (viewing it again regenerates it!)&#xD;
+&#xD;
+For VPN users: Use this container with the same network as your torrent client (e.g., network_mode: container:vpn_container_name)</Overview>
+  <Category>Tools: Network:VPN</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/gklassy/unraid-templates/main/templates/mamapi.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/gklassy/unraid-templates/main/templates/images/mamapi.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText>If you appreciate this container, consider donating to the developer</DonateText>
+  <DonateLink>https://github.com/elforkhead</DonateLink>
+  <Description>Automatic MyAnonamouse dynamic seedbox IP updater for VPN users</Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/mamapi</HostDir>
+      <ContainerDir>/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment>
+    <Variable>
+      <Value/>
+      <Name>MAM_ID</Name>
+      <Mode/>
+      <Description>Your MAM session cookie (mam_id). Create this in MAM Security settings with ASN lock and dynamic seedbox enabled.</Description>
+    </Variable>
+    <Variable>
+      <Value>America/New_York</Value>
+      <Name>TZ</Name>
+      <Mode/>
+      <Description>Timezone for log timestamps. See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</Description>
+    </Variable>
+    <Variable>
+      <Value>False</Value>
+      <Name>DEBUG</Name>
+      <Mode/>
+      <Description>Enable debug logging (True/False). Not recommended for general use.</Description>
+    </Variable>
+    <Variable>
+      <Value>False</Value>
+      <Name>WRITE_CURRENT_MAMID</Name>
+      <Mode/>
+      <Description>Write the current mam_id to a file in the data directory (True/False)</Description>
+    </Variable>
+    <Variable>
+      <Value>False</Value>
+      <Name>SHUTDOWN_ON_DISCONNECT</Name>
+      <Mode/>
+      <Description>Exit container when internet connection is lost (True/False). Useful with restart policy.</Description>
+    </Variable>
+    <Variable>
+      <Value/>
+      <Name>NOTIFY_URLS</Name>
+      <Mode/>
+      <Description>Apprise notification URLs (comma-separated) for error notifications</Description>
+    </Variable>
+  </Environment>
+  <Labels/>
+  <Config Name="MAM Session ID" Target="MAM_ID" Default="" Mode="" Description="Your MAM session cookie (mam_id). Create this in MAM Security settings with ASN lock and dynamic seedbox enabled." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Data Directory" Target="/data" Default="/mnt/user/appdata/mamapi" Mode="rw" Description="Container data storage location" Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Timezone for log timestamps. See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Debug Logging" Target="DEBUG" Default="False" Mode="" Description="Enable debug logging (True/False). Not recommended for general use." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Write Current MAM ID" Target="WRITE_CURRENT_MAMID" Default="False" Mode="" Description="Write the current mam_id to a file in the data directory (True/False)" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Shutdown on Disconnect" Target="SHUTDOWN_ON_DISCONNECT" Default="False" Mode="" Description="Exit container when internet connection is lost (True/False). Useful with restart policy." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Notification URLs" Target="NOTIFY_URLS" Default="" Mode="" Description="Apprise notification URLs (comma-separated) for error notifications" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+</Container>
