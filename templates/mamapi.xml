@@ -13,7 +13,7 @@
 &#xD;
 For features and detailed information, visit: https://github.com/elforkhead/mamapi&#xD;
 &#xD;
-IMPORTANT: You must create a MAM session with:&#xD;
+IMPORTANT: You must create a MAM session at https://www.myanonamouse.net/preferences/index.php?view=security with:&#xD;
 1. Locked session: ASN (NOT IP locked)&#xD;
 2. Dynamic seedbox: Yes&#xD;
 3. Copy the mam_id cookie when first created&#xD;
@@ -21,7 +21,7 @@ IMPORTANT: You must create a MAM session with:&#xD;
 &#xD;
 WARNING: Viewing the cookie again regenerates it!&#xD;
 &#xD;
-For VPN users: Set Network Type to match your torrent client's network</Overview>
+For VPN users: Set Network type to "container" and Container network to "binhex-qbittorrentvpn"</Overview>
   <Category>Tools: Network:VPN</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/gklassy/unraid-templates/main/templates/mamapi.xml</TemplateURL>
