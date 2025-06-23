@@ -11,21 +11,28 @@
   <Project>https://github.com/elforkhead/mamapi</Project>
   <Overview>MAM API container for updating MyAnonamouse dynamic seedbox IP addresses automatically. This container monitors your VPN IP changes and updates MAM's API to ensure continuous connectivity with the tracker.&#xD;
 &#xD;
-For features and detailed information, visit: https://github.com/elforkhead/mamapi&#xD;
+SETUP INSTRUCTIONS:&#xD;
 &#xD;
-IMPORTANT: You must create a MAM session at https://www.myanonamouse.net/preferences/index.php?view=security with:&#xD;
-1. Locked session: ASN (NOT IP locked)&#xD;
-2. Dynamic seedbox: Yes&#xD;
-3. Copy the mam_id cookie when first created&#xD;
-4. Add additional ASNs as needed through MAM's 'Manage Session' menu&#xD;
+1. Go to: https://www.myanonamouse.net/preferences/index.php?view=security&#xD;
+2. Copy your existing public IP address into the IP field&#xD;
+3. Set the following options:&#xD;
+   - Locked session: Check "ASN" checkbox&#xD;
+   - Dynamic seedbox: Check "YES" checkbox&#xD;
+4. Label the session: "unraid"&#xD;
+5. Click "Submit changes"&#xD;
+6. Copy the token/session ID and paste it into the "MAM Session ID" field of this template&#xD;
+7. IMPORTANT: Set Network type to "container" and Container network to "binhex-qbittorrentvpn"&#xD;
+8. Start the container and check the logs - your ASN should not be recognized initially&#xD;
+9. Go back to MAM and click "Manage Session"&#xD;
+10. Add the IP address shown in this container's logs&#xD;
 &#xD;
-WARNING: Viewing the cookie again regenerates it!&#xD;
+WARNING: Viewing the token again regenerates it! Only copy it once when first created.&#xD;
 &#xD;
-For VPN users: Set Network type to "container" and Container network to "binhex-qbittorrentvpn"</Overview>
+For more details: https://github.com/elforkhead/mamapi</Overview>
   <Category>Tools: Network:VPN</Category>
   <WebUI/>
-  <TemplateURL>https://raw.githubusercontent.com/gklassy/unraid-templates/main/templates/mamapi.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/gklassy/unraid-templates/main/templates/images/mamapi.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/RapidHog/unraid-templates/main/templates/mamapi.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/RapidHog/unraid-templates/main/templates/images/mamapi.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
