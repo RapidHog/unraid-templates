@@ -10,11 +10,32 @@
 ### 1. Local Testing (Before Submission)
 
 #### A. Test Template Installation
+
+**Method 1: Private CA Template (Recommended for Testing)**
+1. SSH into your Unraid server
+2. Create the private apps directory:
+   ```bash
+   mkdir -p /boot/config/plugins/community.applications/private/gklassy/
+   ```
+3. Copy your template XML to this directory:
+   ```bash
+   cp /path/to/mamapi.xml /boot/config/plugins/community.applications/private/gklassy/
+   ```
+4. In Unraid, go to **Apps** tab
+5. Search for "mamapi" - it will appear in the results
+6. Install and test from your private template
+
+**Method 2: Docker Manual Installation**
+1. In Unraid, go to **Docker** tab
+2. Click **Add Container**
+3. Fill in Repository: `elforkhead/mamapi:latest`
+4. Manually configure all settings from your template
+
+**Method 3: Direct Docker Hub Search**
 1. In Unraid, go to **Apps** tab
-2. Click **Settings** (gear icon)
-3. Enable **Enable additional search results from dockerHub**
-4. Search for "mamapi" and install using Docker Hub
-5. Click **Add Container** manually and fill in the details from your template
+2. Search for "elforkhead/mamapi" or just "mamapi"
+3. If your Docker image is public on Docker Hub, it will appear
+4. Install and configure (note: this won't use your custom template)
 
 #### B. Validate Template Format
 - Ensure all required fields are present:

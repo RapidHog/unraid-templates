@@ -11,12 +11,7 @@
   <Project>https://github.com/elforkhead/mamapi</Project>
   <Overview>MAM API container for updating MyAnonamouse dynamic seedbox IP addresses automatically. This container monitors your VPN IP changes and updates MAM's API to ensure continuous connectivity with the tracker.&#xD;
 &#xD;
-Features:&#xD;
-- Automatic IP change detection and updating&#xD;
-- Rate limit handling to avoid API throttling&#xD;
-- Clear error messages and logging&#xD;
-- Support for multiple ASN connections&#xD;
-- Apprise notification support&#xD;
+For features and detailed information, visit: https://github.com/elforkhead/mamapi&#xD;
 &#xD;
 IMPORTANT: You must create a MAM session with:&#xD;
 1. Locked session: ASN (NOT IP locked)&#xD;
@@ -45,7 +40,7 @@ For VPN users: Set Network Type to match your torrent client's network</Overview
   <Data>
     <Volume>
       <HostDir>/mnt/user/appdata/mamapi</HostDir>
-      <ContainerDir>/data</ContainerDir>
+      <ContainerDir>/config</ContainerDir>
       <Mode>rw</Mode>
     </Volume>
   </Data>
@@ -89,7 +84,7 @@ For VPN users: Set Network Type to match your torrent client's network</Overview
   </Environment>
   <Labels/>
   <Config Name="MAM Session ID" Target="MAM_ID" Default="" Mode="" Description="Your MAM session cookie (mam_id). Create in Security settings with ASN lock (not IP lock) and dynamic seedbox enabled. DO NOT include @IP format." Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="Data Directory" Target="/data" Default="/mnt/user/appdata/mamapi" Mode="rw" Description="Container data storage location" Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Data Directory" Target="/config" Default="/mnt/user/appdata/mamapi" Mode="rw" Description="appdata" Type="Path" Display="always" Required="true" Mask="false"/>
   <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Timezone for log timestamps. See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Debug Logging" Target="DEBUG" Default="False" Mode="" Description="Enable debug logging (True/False). Not recommended for general use." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Write Current MAM ID" Target="WRITE_CURRENT_MAMID" Default="False" Mode="" Description="Write the current mam_id to a file in the data directory (True/False)" Type="Variable" Display="advanced" Required="false" Mask="false"/>

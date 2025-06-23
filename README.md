@@ -6,12 +6,7 @@ This repository contains Unraid Community Application templates.
 
 The mamapi container automatically updates your MyAnonamouse (MAM) dynamic seedbox IP when using a VPN connection. This ensures continuous connectivity with the MAM tracker even when your VPN IP changes.
 
-### Features
-- Automatic IP change detection
-- Smart rate limit handling
-- Clear error logging
-- ASN session support
-- Optional notifications via Apprise
+For features and detailed information, visit the [mamapi GitHub repository](https://github.com/elforkhead/mamapi).
 
 ### Setup Instructions
 
