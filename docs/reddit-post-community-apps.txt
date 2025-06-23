@@ -1,0 +1,281 @@
+jump to content
+My Subreddits
+-Dashboard-home-popular-All-Random-Users-Friends-Mod-Modqueue-Saved-edit
+|
+add shortcuts from the my subreddits menu at left or click the button by the subreddit name, drag and drop to sort
+reddit.com
+ unRAID
+
+    comments
+
+hihomiedude (1,615·1,141)|messages|notifications2|chat messages|mod messages|
+
+    preferences|
+
+|logout
+this post was submitted on 21 Apr 2022
+4 points (100% upvoted)
+shortlink:
+Submit a new link
+Submit a new text post
+Get an ad-free experience with special benefits, and directly support Reddit.
+unRAID
+Use subreddit style
+leave+dashboard+shortcut
+95,570 readers
+
+76 users here now
+Show my flair on this subreddit. It looks like:
+hihomiedude
+
+Unraid is a linux based operating system that allows you to create high capacity data and media servers.
+
+Official Links
+
+    Lime Technology Home Page
+
+    Unraid Forums
+
+    Unraid Blog
+
+    Twitter
+
+    Discord
+
+Resources
+
+    Video Tutorials by SpaceInvaderOne
+
+    Video Tutorials by IBRACORP
+
+    Unraid Wiki
+
+    /r/unRAID guides
+
+Related Subreddits
+
+    /r/Plex
+
+    /r/HTPC
+
+    /r/DataHoarder
+
+    /r/Buildapcsales
+
+    /r/HomeTheater
+
+created by krackatoa community for 13 years
+MODERATORS
+
+    krackato
+     
+    spaceinvaderone
+     
+    chaos_a
+     
+    tweet_widget
+     
+    Unraid-Mod
+     
+    ergibson83
+     
+    Genghis_Tr0n187
+     
+    nicholasangelsg
+     
+    xxtkx
+     
+    experfailist
+     
+    ...and 2 more »
+
+account activity
+
+4
+
+Is there any documentation about making your own unraid docker app? (self.unRAID)
+
+submitted 3 years ago * by ithakaa
+ 
+
+I'm looking into Docker so I can roll my own docker versions of Radarr Sonarr etc
+
+I understand docker is docker, all well and good, but unraid apparently uses its own templating?
+
+So back to why? ...well I want to integrate zerotier into the container, but not necessarily expose my unraid host to the zerotier network.
+
+It also means I can provision apps within separate zerotier networks and make them available to select family members who are situated in remote locations.
+
+No, I don't want to use wireguard thanks
+
+    13 comments sharesavereportcrosspost
+
+all 13 commentsnavigate by
+ subscribe
+sorted by: best
+formatting help
+content policy
+
+[–]Fribbtastic
+ 
+3 points 3 years ago 
+
+I don't know that there is any documentation about this because it just utilizes two things which one is unraid specific and the other is docker specific:
+
+    the template
+    the docker image
+
+The template is what defines everything that creates your container, name, paths, variables etc. basically a UI representation of the docker run command on the console. Whenever you add a new container, you are creating a template. Those are not much different to the templates you get from the community applications, they are just not shared with the community. here is a forum post on how to publish you docker template to the community apps.
+
+That means that a variable you assign in the template will translate to the -e parameter in the docker run command. You can actually see that when you create/edit a container that will run those commands with the parameters you have set in the template.
+
+The second part is the docker image itself. For that you create a Dockerfile in a repository, build that Dockerfile to verify what you want and then publish it on dockerhub or some other location that users then can use it. How to create an image is described here in the docker documentation.
+
+In your case, it might be better to follow the principle of docker to run one application inside a single docker container. so whatever you want to do with zerotier, let other docker containers run through that zerotier container by passing the traffic through. How that is done is explained here
+
+the advantage of this is that you don't have to rebuild your own docker (which would include sonarr or radarr) each time an update is made to them. And then the question is why go through the trouble and creating your own containers if there is already a zerotier image available
+
+    permalink embedsave reportreply
+
+[–]eob157
+ 
+1 point 3 years ago 
+
+Howdy. My problem is somewhat related and I was wondering if you could elaborate on something for me.
+
+I'm trying to make a template for a docker that does not currently have one and it is not listed on DockerHub. When creating the xml for the container can I leave out the Registry tag or is DockerHub required for CA templates?
+
+    permalink embedsave parentreportreply
+
+[–]Fribbtastic
+ 
+2 points 3 years ago 
+
+As I said before, the template is just a convenient way of creating the necessary command to create the container. Everything you enter in the template will be translated to the respective parts of the command.
+
+The repository is the docker image that should be used for the container and will be downloaded from dockerhub if it isn't already available locally.
+
+And that is the important part here. You need a docker image, doesn't matter where it is coming from, if it was downloaded from dockerhub or some other online source or if you built it yourself.
+
+And that last part is probably what you would be looking for. If the docker image isn't available online you would have to build it yourself from a Dockerfile and then use that in your template.
+
+This has some drawbacks, unless the software doesn't update itself, every new version requires a new docker image to be built. You might not have auto update functionality in unraid either.
+
+    permalink embedsave parentreportreply
+
+[–]eob157
+ 
+1 point 3 years ago 
+
+Thanks for the quick reply. I am grabbing the docker image from an online source (the project in question) but like I said I can't find it on dockerhub and every guide I've read has mentioned dockerhub so I want to make sure that this will still work as intended without a link to dockerhub.
+
+    permalink embedsave parentreportreply
+
+[–]Fribbtastic
+ 
+2 points 3 years ago 
+
+Oh I see it seems that the docker image is available on ghcr.io instead. Sorry, I don't have any experience using something else other than dockerhub.
+
+Maybe you can add it as the hub URL in the advanced view of the template or it needs to be added on docker I am not particularly sure and my quick Google searches haven't turned anything up so far.
+
+    permalink embedsave parentreportreply
+
+[–]eob157
+ 
+1 point 3 years ago 
+
+Okay I'll give it a try and hope for the best. I'm led to believe by google that it should work fine.
+
+    permalink embedsave parentreportreply
+
+[–]Fribbtastic
+ 
+2 points 3 years ago 
+
+did you get it working?
+
+    permalink embedsave parentreportreply
+
+[–]eob157
+ 
+1 point 3 years ago 
+
+The portion that this thread pertains to is working now yes. Here is a screen grab
+of the settings and I added a link to the github in the docker template repo
+
+, although I don't think this part was necessary,
+
+    permalink embedsave parentreportreply
+
+[–]RiffSphere
+ 
+-2 points 3 years ago 
+
+Just make a docker, push to GitHub, add a docker, set the name, source, port, paths and variables.
+
+unRAID uses normal dockers, things in the store are just prefilled templates with variables you might want to set.
+
+    permalink embedsave reportreply
+
+[–]ithakaa
+ 
+[S] 1 point 3 years ago 
+
+Why push to GitHub?
+
+    permalink embedsave parentreportreply
+
+[–]RiffSphere
+ 
+1 point 3 years ago 
+
+Cause I'm not awake 😂 Dockerhub probably. Though you can also use normal docker and local images, I don't think that works with the GUI (haven't tried, only things on dockerhub)
+
+    permalink embedsave parentreportreply
+
+[–]Planetix
+ 
+1 point 3 years ago 
+
+You are way overthinking the solution to the problem. There are simple ways to configure Zerotier - more specifically, the Zerotier container for Unraid - to allow only access to the hosts you want, you don’t have to expose the Unraid host. Building (and maintaining) your own versions of popular app containers seems a bit extreme.
+
+    permalink embedsave reportreply
+
+[–]ithakaa
+ 
+[S] 1 point 3 years ago 
+
+It might be the case but I'll learn something in the process 😃
+
+    permalink embedsave parentreportreply
+
+    about
+    blog
+    about
+    advertising
+    careers
+
+    help
+    site rules
+    Reddit help center
+    reddiquette
+    mod guidelines
+    contact us
+
+    apps & tools
+    Reddit for iPhone
+    Reddit for Android
+    mobile website
+
+    <3
+    reddit premium
+
+Use of this site constitutes acceptance of our User Agreement and Privacy Policy. © 2025 reddit inc. All rights reserved.
+
+REDDIT and the ALIEN Logo are registered trademarks of reddit inc.
+
+π 
+Previously read comments
+Always show this type of notification
+

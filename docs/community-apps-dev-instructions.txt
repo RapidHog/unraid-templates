@@ -1,0 +1,354 @@
+
+Jump to content
+Unraid
+
+    Unraid Home
+    Unraid Docs
+    Leaderboard
+
+    Existing user? Sign In
+    Sign Up
+
+    Home
+    Application Support
+    Programming
+    CA - Application Policies & Privacy Policy
+
+CA - Application Policies & Privacy Policy
+
+    Followers
+
+Squid
+Squid
+January 9, 2020 in Programming
+
+    Start new topic
+
+Featured Replies
+Squid
+Squid
+June 12
+Quick note: Process for getting a new repository added to CA has now been streamlined. Instead of sending me a PM, new authors / maintainers should now fill out this form Due to the large amounts of notifications that I get on any random day, sometimes PMs would be lost in the shuffle. This form will put the request in a place where myself / Limetech will always notice it. If there is any follow ups required, either LT or myself will be in touch via your selected communication preference. Simi
+
+    Thanks
+
+Recommended by Squid
+Squid Grand Master
+Squid
+Administrators
+
+Posted January 9, 2020
+
+Note: this thread is locked.  Any questions, please post in the unRaid FAQ Feedback Thread.
+
+ 
+
+image.png
+
+Community Applications - Application Policies
+
+ 
+
+Community Applications has one fundamental goal:  Ensuring that the end-user experience with the various add-ons to your server is consistent and trouble free. The application lists contained within CA are moderated and vetted.  Every attempt is made to ensure that only safe and compatible applications are present.  As the unRaid community gets larger, and more applications become available within Community Applications, the following should be noted:
+
+ 
+
+    All applications are subject to approval for inclusion.
+
+    Closed source plugins are not accepted into CA.  (Note that a plugin may include closed-source binaries which in certain circumstances do not violate this rule - Moderator's discretion).  In certain exceptional cases an exemption to this rule may be granted.  
+
+    Closed source applications within an docker application are generally not accepted within CA unless they are from a reputable source or are a well known application (eg: Crashplan, Plex et al).  In other words, an application created by the template maintainer MUST be open source and subject to code examination.
+
+    All GitHub repositories / dockerHub repositories must have 2 Factor Authentication enabled, and an acknowledgement of this must be given to the authors/maintainers of Community Applications or Limetech.
+
+    Plugins which are better suited as a docker application are not eligible for inclusion in CA.
+
+    "Proof Of Concept" applications are generally not accepted into CA.  If it is accepted into CA, then such applications must include an appropriate notice within its description.
+
+    Any application that contains malicious software or intent is subject to immediate removal with no notification being given.  This also includes any other software included within the application such as crypto mining unless the application itself is for crypto mining.  No Exceptions. 
+
+    Bugs within applications can (and do) happen.  This is outside of the control of the moderators of CA.  Depending upon the circumstances, the application may be subject to moderation due to the bug.  This moderation may be mild or in the cases where the bug could cause data-loss severe resulting in the possible blacklisting of the application.  In most cases, the author is given time to rectify the bug before moderation happens.  Minor issues with any application will tend to not have any moderation applied.  As a general rule, it is recommended to always keep your applications (especially plugins and unRaid itself) up to date.  In the case of egregious software errors, the moderators of CA will err on the side of the user instead of the side of the author.
+
+    Plugins may on occasion (this is an exception, rather than the rule) have problems / bugs when run on a release candidate of unRaid.  More leeway is given to authors of the plugin in this situation than if the issue occurs on a stable release of unRaid.
+
+    Any application listed within CA is subject to at any time various means of moderation.  This includes but is not limited to fixing template errors, assigning minimum / maximum versions of unRaid the application is compatible with, notifying users of any issues with their installed applications via the Fix Common Problems plugin, deprecating an abandoned application,etc.  Notification to the template maintainers may or may not be given. 
+
+    So called abandoned applications (where the author / maintainer) has completely abandoned support for the application may or may not be removed from CA.  This primarily depends upon whether or not the application works for its designed purpose.  However, should another template be published within CA that supersedes the abandoned template, then the abandoned one may be removed with no notice being given.
+
+    Any application template not meeting certain minimum standards results in automatic removal of that application until such time as the template is revised to meet those standards.  (As an example, all applications must include a reasonable description.)
+
+    In certain circumstances, it may be more appropriate to utilize "branches" in templates than to submit multiple templates.  This is discretionary of the moderators.  See here.  
+
+    Any violation of the security policies enforced by CA and the associated application feed results in automatic blacklisting of an author's entire template repository.  No warnings and no exceptions.
+
+    The case of any submitted application which refers to the exact same dockerHub repository as an existing application will not be accepted.  In certain circumstances though the pre-existing application template may be removed and the new one accepted in its place - Moderator's discretion.
+
+    All templates within a specific repository must have different application names.  In case of a conflict within the same repository, one of the templates is automatically removed
+
+    Donation links are allowed and encouraged but only show up for installed apps and on your "Repository" section in Community Applications.
+
+    All descriptions, icons etc must not be "offensive" and should adhere to "good taste".  Furthermore, animated icons are not allowed.
+
+    In the situations where there is already a multitude of certain applications available (ie: Plex, nzbGet, Radarr, etc) new submissions of those applications will not be accepted.  An exception may however be made if the new submission brings something unique to the application.  This is at the discretion of the moderators of CA.
+
+ 
+
+A further explanation of the last point is in order
+
+ 
+
+(In this example, I am referring to Plex Media Center itself, not the various add-ons available for Plex, eg Plex Connect, plpp, gaps, etc)
+
+ 
+
+Utilizing Plex as an example, there are already applications within CA from Binhex, LinuxServer along with the official Plex Container.   All of these are extremely well supported and maintained, and fundamentally there is absolutely no difference between any of them.  It is extremely unlikely that any new submission of a Plex application will bring any tangible benefits to the unRaid community, and will more than likely only cause confusion for the end-user as to "which one do I install?"  The end-user experience is of utmost importance to the authors of Community Applications, it's moderators, and Limetech themselves.
+
+ 
+
+This however does NOT mean that no new Plex will be accepted.  If a new Plex application is submitted and it does bring something new / unique to the application / container it may be accepted at the moderator's discretion.
+
+ 
+
+Should any user wish to run a version of Plex that is not available within CA, there are multiple options available. ( Performing a dockerHub search for the application, having CA manage so-called "private applications", or utilizing the template repository system of unRaid itself. ) See here.
+
+ 
+
+The intent here is to not stifle any innovation from any given author, but rather to ensure that the end-user experience remains consistently high.  If the circumstances regarding an already present Plex application change ( no longer maintained / supported, or is deemed to be extraneous and not benefiting the unRaid community, etc ) then that existing application may be removed and new submissions for Plex may be accepted.
+
+ 
+
+CA does allow installations of deprecated / incompatible applications by visiting it's Settings Page.  (Although it is not recommended to do this.) 
+
+ 
+
+Any plugin or docker application which is classified as being Beta from the author is identified within CA.  This classification does not however mean that there will be problems with the application.
+
+ 
+
+The ability to install applications that are outside of CA's control (plugin or docker) will never be impeded.  (Although it isn't recommended to install any plugin that is not available within CA)
+
+ 
+
+All actions taken by a moderator of CA (or via the associated application feed) is publicly viewable either within CA under it's Statistics section, or via a GitHub Repository.  In the rare case of a controversial decision taken by the moderators of CA, the decisions are reviewed by a larger select group of trusted unRaid users and the staff members of Limetech.  If as a maintainer / author you disagree with any actions taken by the moderators of CA you should bring your concerns in a PM to @Squid.  If the decision made by Squid does not satisfy you, then the final decision will be made by @SpencerJ (Note: The moderators of CA @pluginCop and @dockerPolice do not read or reply to any PM)
+
+ 
+
+On the other side of the coin, if as a user you feel that some application should be moderated in some way, then feel free to PM @Squid who will then delegate appropriately to one of the moderators of CA.
+
+ 
+
+Note: this document may be amended at any time, and any new policies added (or policies changed) will be retroactive to any / all applications within CA.
+
+ 
+
+Further note:  All download counts listed within CA are based upon dockerHub.  In the case of ghcr containers, the stats will be gathered from the dockerHub version instead.  If an equivalent dockerHub container does not exist, then no download stats will be listed.  Also, not all dockerHub containers have the ability to discern the download counts.
+
+ 
+
+Authors / Maintainers
+
+To get your apps added to CA, see HERE.
+
+Community Applications Privacy Policy
+
+Effective Date: 5.28.25
+
+Welcome to one of the least invasive corners of the internet. This Privacy Policy for Community Applications is here to explain what we do—and more importantly, what we don’t do—when it comes to your data.
+
+Spoiler: not much.
+
+1. Personal Information? Not Our Thing
+
+We don’t collect it. We don’t store it. We don’t even want it. No user accounts, no cookies, no IP logging, and definitely no tracking pixels. You could be a time-traveling wombat with Wi-Fi and we wouldn’t know. Or care.
+
+2. What We Do Track
+
+Just one thing: how many times each application gets installed. That’s it. No names, no locations, no drama. Just a simple counter going up. It helps us understand what content people are interested in—without prying into who those people are.
+
+3. No User Tracking
+
+We don’t monitor individuals. We don’t track devices. We don’t do behavioural analytics. Our download counter doesn’t care who you are—it just counts downloads, not identities.
+
+4. No Data Sharing or Selling
+
+We don’t share, sell, lease, rent, barter, auction, or whisper your data to anyone. Mostly because we don’t have any. No third-party scripts, no ad networks, no shady deals.
+
+5. Policy Changes
+
+If we ever update this policy—say, if we suddenly decide to start tracking download patterns of sentient AIs—we’ll post the changes right here. The effective date at the top will always tell you when we last updated things.
+
+6. Contact Us
+
+Have a question? Want to compliment our minimalist approach to privacy? You can reach us at contact@unraid.net. Just know we won’t know who you are unless you tell us—and that’s kind of the whole point.
+
+    Like 6
+
+    5 yr Squid pinned this topic
+    3 weeks later...
+
+Squid Grand Master
+Squid
+Administrators
+
+January 30, 2020
+
+"Plugins"
+
+ 
+
+It should be noted that within the Apps Tab, both docker applications and plugins are available.  Plugins generally extend the base OS to provide additional functionality, utilities etc.  The policies of Community Applications are stricter on plugins than docker applications 
+
+    On 1/9/2020 at 7:19 AM, Squid said:
+
+        Closed source plugins are not accepted into CA.  (Note that a plugin may include closed-source binaries which in certain circumstances do not violate this rule - Moderator's discretion).  In certain exceptional cases an exemption to this rule may be granted.  
+        Plugins which are better suited as a docker application are not eligible for inclusion in CA.
+
+This is because ALL plugins run as the "root" user.  In other words, any plugin has complete access to any and all files stored on your server, along with having the ability to modify certain system files.  In most cases, the ability to modify system files is required for the plugin to operate and provide the functionality it offers.  Additionally certain plugins (notably unRaid DVB and unRaid nVidia) will completely overwrite the base OS boot files to provide their functionality.
+
+ 
+
+Because of this, in certain circumstances when you are having trouble with your server you may be asked to reboot the server in "Safe Mode".  This eliminates any possibility that the plugin(s) are causing the trouble.  (The notable exception is unRaid DVB / unRaid nVidia which will require you to revert to the standard Limetech unRaid OS to eliminate them as a cause of the problem)
+
+ 
+
+ 
+
+All versions of Community Applications clearly identify if the application in question is a plugin or a docker application (plugins will have "Plugin" within the category list, and will also have a plugin / docker watermark present on each of the application's cards)
+
+    Thanks 1
+
+Squid Grand Master
+Squid
+Administrators
+
+February 2, 2020
+
+"Updated Apps Section"
+
+ 
+
+CA has an "Updated Apps" section.  This section lists the most recently updated applications when the author chooses to let CA know that the application has been updated.
+
+ 
+
+Because many of the docker applications within CA are updated automatically on dockerHub to reflect new versions of the base OS or new versions of the application itself, most authors do not let CA know that the application has been updated.
+
+ 
+
+Because of this, the updated apps section tends to be very skewed towards only listing plugins with only the odd docker author / maintainer taking the extra time to inform CA that the container has been updated.
+
+ 
+
+Any given application never appearing within the updated apps section does not necessarily mean that the application has not been updated recently.
+
+    5 weeks later...
+
+Squid Grand Master
+Squid
+Administrators
+
+July 5, 2021
+
+Security Violations
+
+ 
+
+    On 1/9/2020 at 7:19 AM, Squid said:
+
+    Any violation of the security policies enforced by CA and the associated application feed results in automatic blacklisting
+
+ 
+
+To expand a little further, this means that any attempt to inject code into the GUI, or an attempt to run any additional bash commands after the docker run command is issued via the template is a security violation.  It doesn't matter if the command is benign or not.  Any attempt results in automatic blacklisting of the app.  If the app happens to require the additional commands, include instructions in the Overview for the user to edit the template accordingly.  There are no exceptions ever.
+
+ 
+
+It should be noted that within Config elements any description that can be construed as an html tag is technically a violation.  Do not have a description of "<some_var>"  Use instead "some_var"
+
+    Thanks 2
+
+    4 weeks later...
+
+Squid Grand Master
+Squid
+Administrators
+
+March 19, 2022
+
+As a note, templates which are obvious CA conversions from a dockerHub search are explicitly banned.  This is to prevent an influx of applications from random / new maintainers who are creating templates for any random application they find on a search.  This is enforced directly from the application feed.
+
+ 
+
+This does NOT mean to imply that you have to actually create the container and the template.  Simply that templates which are obviously created by CA's dockerHub installation routine are banned
+
+    1 year later...
+
+Squid Grand Master
+Squid
+Administrators
+
+October 25, 2024
+
+    On 1/9/2020 at 7:19 AM, Squid said:
+
+        Any violation of the security policies enforced by CA and the associated application feed results in automatic blacklisting of an author's entire template repository.  No warnings and no exceptions.
+
+To elaborate on this point a bit more, a change in the template repository on GitHub -> eg: transferring the repository to another user, renaming the repository, or changing your username -> can be inferred to be either a completely innocent change, or could also be a result of a malicious actor and/or a breach of the GitHub account.
+
+ 
+
+To protect the integrity of the system and the user base, the automatic checks will always err on the side of security.  IE: We will blacklist / remove the repository first and ask questions later...
+
+ 
+
+Andrew
+
+    Like 2
+
+    May 28 Squid changed the title to CA - Application Policies & Privacy Policy
+    2 weeks later...
+
+Squid Grand Master
+Squid
+Administrators
+
+June 12
+
+    Featured 
+
+Quick note: Process for getting a new repository added to CA has now been streamlined. Instead of sending me a PM, new authors / maintainers should now fill out this form
+
+Due to the large amounts of notifications that I get on any random day, sometimes PMs would be lost in the shuffle. This form will put the request in a place where myself / Limetech will always notice it.
+
+If there is any follow ups required, either LT or myself will be in touch via your selected communication preference. Similarly, after filling out the form, if you have further questions / concerns, then either send a DM here on the forums or in Discord to unraid_squid
+
+Note: After filling out the form there will be a link to view your request. This will not work as you won't have credentials to do this. We're working on hiding / modifying the confirmation to eliminate that link.
+
+Give us up to 48 hours to handle everything. You can verify if your repository has been added via Apps, Statistics, Repositories. If the repository is listed, but the applications aren't appearing, then looking in Statistics, Template Errors or Statistics, Invalid Templates will show why in most cases. Any follow up questions etc do via PM in the forum or in discord
+
+A
+
+    Thanks 2
+
+Guest
+This topic is now closed to further replies.
+Go to topic listing
+
+    Home
+    Application Support
+    Programming
+    CA - Application Policies & Privacy Policy
+
+    All Activity
+
+discord
+youtube
+bluesky
+
+    x
+
+    Cookies
+    RSS
+
+Powered by Invision Community
+
