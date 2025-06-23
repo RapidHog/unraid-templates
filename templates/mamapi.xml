@@ -59,10 +59,10 @@ For more details: https://github.com/elforkhead/mamapi</Overview>
       <Description>Your MAM session cookie (mam_id). Create in Security settings with ASN lock (not IP lock) and dynamic seedbox enabled. DO NOT include @IP format.</Description>
     </Variable>
     <Variable>
-      <Value>America/New_York</Value>
+      <Value>UTC</Value>
       <Name>TZ</Name>
       <Mode/>
-      <Description>Timezone for log timestamps. See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</Description>
+      <Description>Optional: Timezone for log timestamps (defaults to UTC if not set). See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</Description>
     </Variable>
     <Variable>
       <Value>False</Value>
@@ -92,7 +92,7 @@ For more details: https://github.com/elforkhead/mamapi</Overview>
   <Labels/>
   <Config Name="MAM Session ID" Target="MAM_ID" Default="" Mode="" Description="Your MAM session cookie (mam_id). Create in Security settings with ASN lock (not IP lock) and dynamic seedbox enabled. DO NOT include @IP format." Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Data Directory" Target="/config" Default="/mnt/user/appdata/mamapi" Mode="rw" Description="appdata" Type="Path" Display="always" Required="true" Mask="false"/>
-  <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Timezone for log timestamps. See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Timezone" Target="TZ" Default="UTC" Mode="" Description="Optional: Timezone for log timestamps (defaults to UTC if not set). See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Debug Logging" Target="DEBUG" Default="False" Mode="" Description="Enable debug logging (True/False). Not recommended for general use." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Write Current MAM ID" Target="WRITE_CURRENT_MAMID" Default="False" Mode="" Description="Write the current mam_id to a file in the data directory (True/False)" Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Shutdown on Disconnect" Target="SHUTDOWN_ON_DISCONNECT" Default="False" Mode="" Description="Exit container when internet connection is lost (True/False). Useful with restart policy." Type="Variable" Display="advanced" Required="false" Mask="false"/>
