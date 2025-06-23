@@ -15,15 +15,18 @@ Features:&#xD;
 - Automatic IP change detection and updating&#xD;
 - Rate limit handling to avoid API throttling&#xD;
 - Clear error messages and logging&#xD;
-- Support for ASN locked sessions&#xD;
+- Support for multiple ASN connections&#xD;
 - Apprise notification support&#xD;
 &#xD;
 IMPORTANT: You must create a MAM session with:&#xD;
-1. ASN locked session: Yes&#xD;
+1. Locked session: ASN (NOT IP locked)&#xD;
 2. Dynamic seedbox: Yes&#xD;
-3. Copy the mam_id cookie when first created (viewing it again regenerates it!)&#xD;
+3. Copy the mam_id cookie when first created&#xD;
+4. Add additional ASNs as needed through MAM's 'Manage Session' menu&#xD;
 &#xD;
-For VPN users: Use this container with the same network as your torrent client (e.g., network_mode: container:vpn_container_name)</Overview>
+WARNING: Viewing the cookie again regenerates it!&#xD;
+&#xD;
+For VPN users: Set Network Type to match your torrent client's network</Overview>
   <Category>Tools: Network:VPN</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/gklassy/unraid-templates/main/templates/mamapi.xml</TemplateURL>
@@ -51,7 +54,7 @@ For VPN users: Use this container with the same network as your torrent client (
       <Value/>
       <Name>MAM_ID</Name>
       <Mode/>
-      <Description>Your MAM session cookie (mam_id). Create this in MAM Security settings with ASN lock and dynamic seedbox enabled.</Description>
+      <Description>Your MAM session cookie (mam_id). Create in Security settings with ASN lock (not IP lock) and dynamic seedbox enabled. DO NOT include @IP format.</Description>
     </Variable>
     <Variable>
       <Value>America/New_York</Value>
@@ -85,7 +88,7 @@ For VPN users: Use this container with the same network as your torrent client (
     </Variable>
   </Environment>
   <Labels/>
-  <Config Name="MAM Session ID" Target="MAM_ID" Default="" Mode="" Description="Your MAM session cookie (mam_id). Create this in MAM Security settings with ASN lock and dynamic seedbox enabled." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="MAM Session ID" Target="MAM_ID" Default="" Mode="" Description="Your MAM session cookie (mam_id). Create in Security settings with ASN lock (not IP lock) and dynamic seedbox enabled. DO NOT include @IP format." Type="Variable" Display="always" Required="true" Mask="true"/>
   <Config Name="Data Directory" Target="/data" Default="/mnt/user/appdata/mamapi" Mode="rw" Description="Container data storage location" Type="Path" Display="always" Required="true" Mask="false"/>
   <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Timezone for log timestamps. See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" Type="Variable" Display="always" Required="false" Mask="false"/>
   <Config Name="Debug Logging" Target="DEBUG" Default="False" Mode="" Description="Enable debug logging (True/False). Not recommended for general use." Type="Variable" Display="advanced" Required="false" Mask="false"/>
